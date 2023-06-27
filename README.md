@@ -1,6 +1,7 @@
+
 # Platform Channels Example
 
-The example shown in the repository is about retrieving the version of the operating system where the application is running.
+This example shows the implementation of a Platform Channels, where the changes emitted by the GPS of the device are listened to.
 
 
 ### Documentation
@@ -46,14 +47,23 @@ HashMap<String,Object> data = (HashMap<String,Object>) call.arguments;
 String product = (String) data.get("product");
 
 ```
+### To subscribe to the changes emitted by the device's GPS, the EventChannel was used.
 
+```dart
+
+final _eventChannel = const EventChannel("geolocation.listener");
+_eventChannel.receiveBroadcastStream().listen((event) {
+        
+        });
+
+```
 
 ## Presentation
 
 
-   | iOS | Android |
-  | ------------- | ------------- |
-  |![evidence3](https://github.com/eliomacrosales/Simple-Platform-Channels-Example/assets/58376042/70f5ed8c-3a28-4273-94af-a3111ed28f40)|![evidence3.3](https://github.com/eliomacrosales/Simple-Platform-Channels-Example/assets/58376042/f6be1e27-52a1-4f3f-82ab-c52c32c5c876)|  
+https://github.com/eliomacrosales/Simple-Platform-Channels-Example/assets/58376042/52e64a23-cf82-407d-aa24-e50e4f053841
+
+https://github.com/eliomacrosales/Simple-Platform-Channels-Example/assets/58376042/8860bf45-ba6d-4afe-be0f-da08b90ca83e
 
 ### Built With
 
@@ -73,6 +83,14 @@ To communicate the client (Flutter) with the hosts (Android/iOS), Java was used 
 [Java-url]: https://www.java.com/en/
 [Swift.image]: https://img.shields.io/badge/Swift-FA7343?style=for-the-badge&logo=swift&logoColor=white
 [Swift-url]: https://www.swift.org/documentation/
+
+
+
+
+
+
+
+
 
 
 
