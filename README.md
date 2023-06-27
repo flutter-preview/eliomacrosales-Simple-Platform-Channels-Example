@@ -8,6 +8,46 @@ The example shown in the repository is about retrieving the version of the opera
 * [Writing custom platform-specific code](https://docs.flutter.dev/platform-integration/platform-channels)
 
 
+
+
+### Send data from client (Flutter) to host
+
+Only the data types specified in the documentation can be sent. These are:
+null, bool, int, double, String, Float, List, Map
+
+```dart
+
+await _methodChannel.invokeMethod(
+          "version",
+          {
+          "product":"Apple pie",
+          "amount":2,
+          "price":3.5,
+          "currency":"USD"
+          }
+      );
+
+```
+
+### Receiving data on host ( iOS / Swift)
+
+```swift
+
+let data : [String:Any] = call.arguments as! [String:Any]
+let product : String = data["product"]
+
+```
+
+### Receiving data on host ( Android / Java)
+
+```java
+
+HashMap<String,Object> data = (HashMap<String,Object>) call.arguments;
+String product = (String) data.get("product");
+
+```
+
+
 ## Presentation
 
 
