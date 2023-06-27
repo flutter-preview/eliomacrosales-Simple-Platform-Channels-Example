@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="example.channels.platform.platform_channels_dojo_example">
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
    <application
         android:label="platform_channels_dojo_example"
         android:name="${applicationName}"
