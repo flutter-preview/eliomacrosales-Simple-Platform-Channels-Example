@@ -63,7 +63,7 @@ _eventChannel.receiveBroadcastStream().listen((event) {
 
 https://github.com/eliomacrosales/Simple-Platform-Channels-Example/assets/58376042/52e64a23-cf82-407d-aa24-e50e4f053841
 
-https://github.com/eliomacrosales/Simple-Platform-Channels-Example/assets/58376042/8860bf45-ba6d-4afe-be0f-da08b90ca83e
+https://github.com/eliomacrosales/Simple-Platform-Channels-Example/assets/58376042/879489bd-abf7-4b22-8b81-93ef6e31d207
 
 ### Built With
 
@@ -83,6 +83,10 @@ To communicate the client (Flutter) with the hosts (Android/iOS), Java was used 
 [Java-url]: https://www.java.com/en/
 [Swift.image]: https://img.shields.io/badge/Swift-FA7343?style=for-the-badge&logo=swift&logoColor=white
 [Swift-url]: https://www.swift.org/documentation/
+
+
+
+
 
 
 
