@@ -174,7 +174,7 @@ void main() {
       final expectedBackgroundColor = Colors.red[400];
       await tester.pumpWidget(homePageWidget);
       await tester.pumpAndSettle();
-      expect(latitudeAndLongitudeText, findsOneWidget);
+      expect(find.text('(0.0 ; 0.0)'), findsOneWidget);
 
       /// Act
       when(
