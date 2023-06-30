@@ -8,7 +8,6 @@ class PermissionHandlerImpl implements PermissionHandler {
   @override
   Future<bool> isPermissionGranted() async {
     final status = await Permission.location.status;
-
     if (status == PermissionStatus.granted) {
       return true;
     } else {

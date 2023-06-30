@@ -19,12 +19,8 @@ class LocationRepositoryImpl implements LocationRepository {
     StreamController<Map<String, double>> streamController =
         StreamController<Map<String, double>>();
 
-    permissionHandler.isPermissionGranted().then((isGranted) {
-      if (isGranted) {
-        _eventChannel.receiveBroadcastStream().listen((event) {
-          streamController.add(event.cast<String, double>());
-        });
-      }
+    _eventChannel.receiveBroadcastStream().listen((event) {
+      streamController.add(event.cast<String, double>());
     });
 
     return streamController.stream;

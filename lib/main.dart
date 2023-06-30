@@ -12,7 +12,13 @@ Future<void> main() async {
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(
-        create: (context) => HomeProvider(startLocationUseCase: sl(), stopLocationUseCase: sl(), listenChangesGPSUseCase: sl())..listenChangesGPS(),
+        create: (context) => HomeProvider(
+            startLocationUseCase: sl(),
+            stopLocationUseCase: sl(),
+            listenChangesGPSUseCase: sl(),
+            permissionHandler: sl())
+          ..getPermissionLocation()
+          ..listenChangesGPS(),
       ),
     ],
     child: MyApp(),

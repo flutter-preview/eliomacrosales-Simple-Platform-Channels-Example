@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 
+import '../../../../core/permission/permission_handler.dart';
 import '../../domain/usecases/listen_changes_GPS.dart';
 import '../../domain/usecases/start_location.dart';
 import '../../domain/usecases/stop_location.dart';
@@ -10,6 +12,7 @@ class HomeProvider with ChangeNotifier {
   final StartLocationUseCase startLocationUseCase;
   final StopLocationUseCase stopLocationUseCase;
   final ListenChangesGPSUseCase listenChangesGPSUseCase;
+  final PermissionHandler permissionHandler;
 
   double? _latitude = 0.0;
   double? get latitude => _latitude;
@@ -20,10 +23,14 @@ class HomeProvider with ChangeNotifier {
   bool _listeningLocation = false;
   bool get listeningLocation => _listeningLocation;
 
+  bool _isPermissionGranted = false;
+  bool get isPermissionGranted => _isPermissionGranted;
+
   HomeProvider(
       {required this.startLocationUseCase,
       required this.stopLocationUseCase,
-      required this.listenChangesGPSUseCase});
+      required this.listenChangesGPSUseCase,
+      required this.permissionHandler});
 
   Future<void> startLocation() async {
     _listeningLocation = true;
@@ -49,5 +56,11 @@ class HomeProvider with ChangeNotifier {
     }, onDone: () {
 
     });
+  }
+
+  Future<bool> getPermissionLocation() async {
+    _isPermissionGranted = await permissionHandler.isPermissionGranted();
+    notifyListeners();
+    return _isPermissionGranted;
   }
 }
