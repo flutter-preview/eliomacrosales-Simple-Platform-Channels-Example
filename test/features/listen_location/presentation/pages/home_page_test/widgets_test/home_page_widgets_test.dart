@@ -35,7 +35,9 @@ void main() {
           startLocationUseCase: startLocationUseCase,
           stopLocationUseCase: stopLocationUseCase,
           permissionHandler: permissionHandler,
-          listenChangesGPSUseCase: listenChangesGPSUseCase);
+          listenChangesGPSUseCase: listenChangesGPSUseCase)
+        ..getPermissionLocation()
+        ..listenChangesGPS();
     },
   );
 
@@ -75,7 +77,9 @@ void main() {
         tester.widget<ElevatedButton>(buttonStartAndStopButton).enabled,
         false,
       );
-      expect(latitudeAndLongitudeText, findsOneWidget);
+      expect(tester.widget<ElevatedButton>(buttonStartAndStopButton).onPressed,
+          isNull);
+      expect(find.text('(0.0 ; 0.0)'), findsOneWidget);
     },
   );
 
@@ -90,7 +94,6 @@ void main() {
       /// Arrange
       await tester.pumpWidget(homePageWidget);
       await tester.pumpAndSettle();
-      await tester.tap(buttonAllowLocation);
 
       /// Act
       when(
@@ -98,9 +101,6 @@ void main() {
       ).thenAnswer(
         (_) async => false,
       );
-      await homeProvider.getPermissionLocation();
-      await tester.pumpWidget(homePageWidget);
-      await tester.pumpAndSettle();
 
       /// Assert
       expect(
@@ -135,14 +135,15 @@ void main() {
       );
 
       await homeProvider.getPermissionLocation();
-      await tester.pumpWidget(homePageWidget);
-      await tester.pumpAndSettle();
+      await tester.pump();
 
       /// Assert
       expect(
         tester.widget<ElevatedButton>(buttonStartAndStopButton).enabled,
         true,
       );
+      expect(tester.widget<ElevatedButton>(buttonStartAndStopButton).onPressed,
+          isNotNull);
 
       final actualProperty = tester
           .widget<ElevatedButton>(buttonStartAndStopButton)
@@ -193,14 +194,15 @@ void main() {
       await tester.tap(buttonStartAndStopButton);
       await homeProvider.startLocation();
 
-      await tester.pumpWidget(homePageWidget);
-      await tester.pumpAndSettle();
+      await tester.pump();
 
       /// Assert
       expect(
         tester.widget<ElevatedButton>(buttonStartAndStopButton).enabled,
         true,
       );
+      expect(tester.widget<ElevatedButton>(buttonStartAndStopButton).onPressed,
+          isNotNull);
 
       final actualProperty = tester
           .widget<ElevatedButton>(buttonStartAndStopButton)
@@ -218,5 +220,4 @@ void main() {
       expect(find.text('(-121.32567 ; 37.65933)'), findsOneWidget);
     },
   );
-
 }
